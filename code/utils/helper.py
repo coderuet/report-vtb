@@ -1,9 +1,10 @@
 import urllib.parse
-from collections import defaultdict
 import json
 from .crypto import md5, encrypt_rsa
 from ..constants.env_constants import EnvCons
 # Replace with actual PEM-formatted public key string
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 def qs_stringify(data, array_format='repeat', sort_function=None):
@@ -75,3 +76,33 @@ def encrypt_data(data: dict) -> dict:
     return {
         "encrypted": encrypt
     }
+
+
+def split_by_month(start_date_str: str, end_date_str: str) -> list[str]:
+    """
+
+    Args:
+        start_date_str (str): _description_
+        end_date_str (str): _description_
+
+    Returns:
+        list[str]: List of date in range with step = 2 months
+    """
+    start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
+    end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
+
+    result = []
+    current = start_date
+
+    while current < end_date:
+        result.append(current.strftime("%Y-%m-%d"))
+        next_date = current + relativedelta(months=1)
+        if next_date >= end_date:
+            break
+        current = next_date
+
+    # Ensure end_date is included
+    if not result or result[-1] != end_date.strftime("%Y-%m-%d"):
+        result.append(end_date.strftime("%Y-%m-%d"))
+
+    return result

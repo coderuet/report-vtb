@@ -3,3 +3,4 @@ venv/
 keys/
 __pycache__
 *.json
+gcs-save-folder/

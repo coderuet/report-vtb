@@ -12,3 +12,4 @@ class CommonConstants:
         'Cache-Control': 'no-store, no-cache',
         'User-Agent': 'okhttp/3.11.0',
     }
+    FUNCTION_NAME_NEED_RETRY = ["login"]

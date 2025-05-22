@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:13
+    container_name:
+    environment:
+      POSTGRES_USER: "${AIRFLOW_WEB_SERVER_PORTS:-admin}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}:-admin"
+      POSTGRES_DB: "${POSTGRES_DB:-report_monthly}"
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+  python_script:
