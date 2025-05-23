@@ -1,5 +1,8 @@
 from google.cloud import storage
 from google.cloud.storage import Client, transfer_manager
+import os
+from ..constants.env_constants import EnvCons
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = EnvCons.GG_CREDS_PATH
 
 
 def upload_blob(bucket_name, source_file_name, destination_blob_name):

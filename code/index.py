@@ -54,18 +54,11 @@ def write_file(grouped_transactions: Dict) -> List[str]:
         f = open(file_path, "w")
         f.write(json.dumps(grouped_transactions[key]))
         f.close()
-        list_file.append(key)
+        list_file.append(f"{key}.json")
     return list_file
 
 
 if __name__ == "__main__":
-    # Get argument
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("--start-date", dest="start_date", required=True)
-    # parser.add_argument("--end-date", dest="end_date", required=True)
-    # args = parser.parse_args()
-    # start_date = args.start_date
-    # end_date = args.end_date
 
     start_date = "2025-03-30"
     end_date = "2025-04-30"
@@ -74,4 +67,5 @@ if __name__ == "__main__":
         start_date=start_date, end_date=end_date, limit=1000)
     clean_trans = clean_data(transactions=transactions)
     list_file = write_file(clean_trans)
-    upload_many_blobs_with_transfer_manager
+    upload_many_blobs_with_transfer_manager(bucket_name=EnvCons.BUCKET_NAME,
+                                            source_directory=EnvCons.PATH_FOLDER_SAVE, filenames=list_file)
