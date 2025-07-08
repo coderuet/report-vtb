@@ -4,12 +4,16 @@ import functools
 import traceback
 import sys
 from ..constants.common_constants import CommonConstants
+from typing import Dict
 
 
-def send_error_to_discord(error_message):
-    payload = {
-        "content": f"⚠️ Error occurred:\n```{error_message}```"
-    }
+def send_error_to_discord(error_message: str):
+    """
+    Send error message to Discord webhook.
+    Args:
+        error_message (str): Error message to send to Discord
+    """
+    payload: Dict = {"content": f"⚠️ Error occurred:\n```{error_message}```"}
     try:
         rq.post(EnvCons.DISCORD_WEBHOOK_URL, json=payload)
     except Exception as e:
@@ -31,4 +35,5 @@ def error_handler(func):
                 raise
             else:
                 sys.exit(1)
+
     return wrapper

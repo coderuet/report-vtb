@@ -17,7 +17,7 @@ def bypass_captcha(svg: str) -> str:
     """
     file_name = str(int(time.time() * 1000)) + ".svg"
     regex = r"<path[^>]*stroke=[^>]*>"
-    new_svg = re.sub(regex, '', svg)
+    new_svg = re.sub(regex, "", svg)
     f = open(file_name, "w")
     f.write(new_svg)
     f.close()
@@ -25,7 +25,8 @@ def bypass_captcha(svg: str) -> str:
     image = Image.open("output.png")
 
     text: str = pytesseract.image_to_string(
-        image, config='--psm 10 --oem 3 -c tessedit_char_whitelist=0123456789')
+        image, config="--psm 10 --oem 3 -c tessedit_char_whitelist=0123456789"
+    )
     # Remove file after used
     os.remove(file_name)
     os.remove("output.png")

@@ -1,12 +1,9 @@
 import base64
-import rsa
 
-# from cryptography.hazmat.primitives.asymmetric import rsa
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Hash import SHA1
 import base64
-import math
 
 
 def encrypt_rsa(text: str, public_key_pem: str) -> str:
