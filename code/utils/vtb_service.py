@@ -134,6 +134,7 @@ def get_transactions(start_date: str, end_date: str, search: str = "", limit: in
 
         res = rq.post(
             f"{EnvCons.BASE_URL}/{EndPoints.GET_HIST_TRANSACTIONS}", json=body, headers=CommonConstants.NULL_HEADER)
+        print("res get_transactions", res.text)
         res.raise_for_status()
         data = res.json()
         pages = int(data["totalRecords"] / data["pageSize"])
