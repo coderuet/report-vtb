@@ -21,7 +21,7 @@ A Python project for generating and managing reports with VTB integration.
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/report-vtb.git
+   git clone https://github.com/coderuet/report-vtb.git
    cd report-vtb
    ```
 
