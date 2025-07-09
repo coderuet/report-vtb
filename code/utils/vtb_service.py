@@ -83,6 +83,7 @@ def login(username: str, password: str):
     body = encrypt_data(params)
     res = rq.post(f"{EnvCons.BASE_URL}/{EndPoints.LOGIN}",
                   headers=headers, json=body)
+    print("res login", res.text)
     res.raise_for_status()
 
     data = res.json()
