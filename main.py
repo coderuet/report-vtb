@@ -27,12 +27,13 @@ class SimpleHandler(BaseHTTPRequestHandler):
             self.wfile.write(
                 b"400 Bad Request: missing params")
             return
-
+        start_date = query_params["start-date"][0]
+        end_date = query_params["end-date"][0]
         self.send_response(200)
         self.send_header("Content-type", "text/plain")
         self.end_headers()
         main_func(
-            start_date=query_params["start-date"], end_date=query_params["end-date"])
+            start_date=start_date, end_date=end_date)
         response_text = f"response v1"
         self.wfile.write(response_text.encode("utf-8"))
 
