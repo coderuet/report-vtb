@@ -31,7 +31,8 @@ class SimpleHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/plain")
         self.end_headers()
-
+        main_func(
+            start_date=query_params["start-date"], end_date=query_params["end-date"])
         response_text = f"response v1"
         self.wfile.write(response_text.encode("utf-8"))
 
