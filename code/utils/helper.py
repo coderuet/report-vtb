@@ -76,7 +76,8 @@ def encrypt_data(data: dict) -> dict:
     # Convert data to JSON string
     payload = json.dumps(data)
     # Encrypt with RSA
-    encrypt = encrypt_rsa(payload, EnvCons.ICB_PUBLIC_KEY)
+
+    encrypt = encrypt_rsa(payload, EnvCons.ICB_PUBLIC_KEY.replace('\\n', '\n'))
     return {
         "encrypted": encrypt
     }
