@@ -4,7 +4,7 @@ import functools
 import traceback
 import sys
 from ..constants.common_constants import CommonConstants
-from typing import Dict
+from typing import Dict, Callable, Any
 import requests
 
 
@@ -21,7 +21,7 @@ def send_error_to_discord(error_message: str):
         print("Failed to send error to Discord:", e)
 
 
-def error_handler(func: function) -> function:
+def error_handler(func: Callable[..., Any]) -> Callable[..., Any]:
     """
     Error handler decorator that catch and handle error after that send message to discord webhook
 
