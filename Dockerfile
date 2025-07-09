@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     libgdk-pixbuf2.0-dev \
     libffi-dev \
     pkg-config \
+    tesseract-ocr \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
