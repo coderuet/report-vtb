@@ -2,5 +2,7 @@ venv/
 .env
 keys/
 __pycache__
-*.json
+gg*.json
 gcs-save-folder/
+
+\d.svg
