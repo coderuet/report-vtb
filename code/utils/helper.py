@@ -69,12 +69,13 @@ def encrypt_data(data: dict) -> dict:
     Returns:
         Dictionary with the encrypted payload
     """
+    params = data.copy()
     query_string = qs_stringify(data, array_format='repeat',
                                 sort_function=lambda a, b: (a > b) - (a < b))
     # Add MD5 signature
-    data['signature'] = md5(query_string)
+    params['signature'] = md5(query_string)
     # Convert data to JSON string
-    payload = json.dumps(data)
+    payload = json.dumps(params)
     # Encrypt with RSA
 
     encrypt = encrypt_rsa(payload, EnvCons.ICB_PUBLIC_KEY.replace('\\n', '\n'))

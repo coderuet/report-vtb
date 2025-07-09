@@ -128,19 +128,18 @@ def get_transactions(start_date: str, end_date: str, search: str = "", limit: in
             "searchToAmt": '',
             "sessionId": sessions_id
         }
-        print("params", params)
         body = encrypt_data(params)
-        print("body", body)
 
         res = rq.post(
             f"{EnvCons.BASE_URL}/{EndPoints.GET_HIST_TRANSACTIONS}", json=body, headers=CommonConstants.NULL_HEADER)
-        print("res get_transactions", res.text)
         res.raise_for_status()
         data = res.json()
         pages = int(data["totalRecords"] / data["pageSize"])
         transactions: List[Dict] = data["transactions"]
         for i in range(pages):
             page_index = i + 1
+            request_id = generate_request_id()
+            params["requestId"] = request_id
             params["pageNumber"] = page_index
             body = encrypt_data(params)
             res = rq.post(
